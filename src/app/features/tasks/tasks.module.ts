@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms'
-import { TasksRoutingModule } from './tasks-routing.module';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -33,7 +32,6 @@ import { TaskFormComponent } from './task-form/task-form.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    TasksRoutingModule,
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,

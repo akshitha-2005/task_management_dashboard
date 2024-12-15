@@ -29,23 +29,6 @@ export class TaskListComponent implements OnInit {
   ngOnInit(): void {
     this.tasks = this.taskService.getTasks();
     this.dataSource = new MatTableDataSource(this.tasks);
-    this.dataSource.sort = this.sort;
-    this.dataSource.sortingDataAccessor = (item, property) => { 
-      switch (property) { 
-        case 'priority': return this.getPriorityValue(item.priority); 
-        case 'dueDate': return new Date(item.dueDate).getTime(); 
-        default: return (item as any)[property]; 
-      }
-    };
-  }
-
-  getPriorityValue(priority: string): number {
-    switch (priority) {
-      case 'High': return 3;
-      case 'Medium': return 2;
-      case 'Low': return 1;
-      default: return 0;
-    }
   }
 
   openTaskDialog(task?: Task): void {

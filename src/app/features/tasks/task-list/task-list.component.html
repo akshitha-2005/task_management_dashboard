@@ -1,0 +1,54 @@
+<mat-toolbar color="primary">
+  Task Management Dashboard
+</mat-toolbar>
+<div style="margin: 20px;">
+  <button mat-raised-button color="warn" (click)="openTaskDialog()">Add Task</button>
+  &nbsp;
+  <mat-form-field appearance="fill">
+    <mat-label>Search Tasks</mat-label>
+    <input matInput [(ngModel)]="filterValue" (input)="applyFilter(filterValue)" placeholder="Search by Title or Description" />
+  </mat-form-field>
+  
+  <mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+    
+    <ng-container matColumnDef="title">
+      <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
+      <mat-cell *matCellDef="let task"> {{task.title}} </mat-cell>
+    </ng-container>
+    
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+      <mat-cell *matCellDef="let task"> {{task.description}} </mat-cell>
+    </ng-container>
+    
+    <ng-container matColumnDef="priority">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Priority </mat-header-cell>
+      <mat-cell *matCellDef="let task"> {{task.priority}} </mat-cell>
+    </ng-container>
+    
+    <ng-container matColumnDef="dueDate">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Due Date </mat-header-cell>
+      <mat-cell *matCellDef="let task"> {{task.dueDate | date}} </mat-cell>
+    </ng-container>
+    
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+      <mat-cell *matCellDef="let task"> {{task.status}} </mat-cell>
+    </ng-container>
+    
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+      <mat-cell *matCellDef="let task">
+        <button mat-icon-button (click)="openTaskDialog(task)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button (click)="deleteTask(task.id)">
+          <mat-icon class="red-icon">delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>

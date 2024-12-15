@@ -1,4 +1,32 @@
 .red-icon {
     color: red;
   }
+
+  .Pending {
+    background-color: #ffcccc; 
+  }
+  
+  .Inprogress {
+    background-color: #ffffcc; 
+  }
+  
+  .Completed {
+    background-color: #ccffcc; 
+  }
+
+  .table-container {
+    padding: 16px;  
+    border-radius: 8px;  
+    background-color: #e3f2fd;  
+  }
+  th.mat-header-cell { 
+    background-color: #e0e0e0; 
+   } 
+   .row-cell { 
+    background-color: #e3f2fd; 
+   }
+
+
+  
+  
   

@@ -29,8 +29,26 @@ export class TaskListComponent implements OnInit {
   ngOnInit(): void {
     this.tasks = this.taskService.getTasks();
     this.dataSource = new MatTableDataSource(this.tasks);
+    this.dataSource.sort = this.sort;
+    this.dataSource.data = this.taskService.getTasks();
   }
-
+  ngAfterViewInit(): void {
+    const priorityOrder: { [key: string]: number } = { Low: 1, Medium: 2, High: 3 };
+  
+    this.dataSource.sortingDataAccessor = (data, header) => {
+      switch (header) {
+        case 'priority':
+          return priorityOrder[data.priority as keyof typeof priorityOrder] || 0;
+        case 'dueDate':
+          return new Date(data.dueDate).getTime(); 
+        default:
+          return (data as any)[header] || ''; 
+      }
+    };
+  
+    this.dataSource.sort = this.sort;
+  }
+  
   openTaskDialog(task?: Task): void {
     const dialogRef = this.dialog.open(TaskFormComponent, {
       width: '400px',
@@ -49,7 +67,7 @@ export class TaskListComponent implements OnInit {
       }
     });
   }
- 
+
   deleteTask(taskId: number): void {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '300px',
@@ -77,5 +95,18 @@ export class TaskListComponent implements OnInit {
     this.tasks = this.taskService.getTasks();
     this.dataSource.data = [...this.tasks]; 
     this.applyFilter(this.filterValue);
+  }
+
+  getRowClass(task: Task): string {
+    switch (task.status) {
+      case 'Pending':
+        return 'Pending';
+      case 'Inprogress':
+        return 'Inprogress';
+      case 'Completed':
+        return 'Completed';
+      default:
+        return '';
+    }
   }
 }

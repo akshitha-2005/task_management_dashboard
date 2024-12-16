@@ -21,7 +21,7 @@ export class TaskFormComponent {
     this.taskForm = this.fb.group({
       id: [data?.id || null],
       title: [data?.title || '', Validators.required],
-      description: [data?.description || ''],
+      description: [data?.description || '', Validators.required],
       priority: [data?.priority || '', Validators.required],
       dueDate: [data?.dueDate || '', Validators.required],
       status: [data?.status || 'Pending', Validators.required]
